@@ -1,0 +1,212 @@
+.contAll{
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    
+}
+
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.centrar2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.letra{
+    font-family: "Homer Simpson", cursive;
+    
+}
+
+.player{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    
+}
+
+
+
+.otherPlayers{
+    width: 100%;
+   
+    height: auto;
+}
+
+.perfil{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: black;
+    
+}
+
+.perfil ::content img{
+    width:100%;
+}
+
+.Contrincante{
+    background-color: #2F4F4F;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 5px;
+    color: whitesmoke;
+    height: 79px;
+    margin: 4px;
+}
+
+.fi{
+    
+    width: 100%;
+}
+
+.tablero{
+   position: relative;
+    background: url('../../assets/imagenes/tableros/cuadrantes.png');
+    background-size: 100%;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    display: flex;
+    width: 98%;
+    height: 390px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+
+
+
+.ficha{
+    height: 120px;
+    width: 60px;
+    overflow: hidden;
+    margin: 2px;
+}
+
+.fichaAcostada{
+    height: 60px;
+    width: 120px;
+    display: flex;
+}
+
+
+
+.DePie{
+    width: 100%;
+    height: 50%;
+    text-align: center;
+}
+
+.acostado{
+    width: 50%;
+    height: 100%;
+    text-align: center;
+}
+
+.DePie::content img{
+    height:100%;
+    border: 1px solid black;
+}
+
+.acostado::content img{
+    height:100%;
+    border: 1px solid black;
+    transform: rotate(90deg);
+}
+
+
+.posicion{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+
+.posicion2{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    margin-left: -240px;
+    margin-top: 120px;
+}
+
+.posicion3{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    margin-left:-120px;
+}
+
+
+.posicion4{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    margin-left:-180px;
+}
+
+@media(max-width: 500px){
+    .Contrincante{ 
+        width: 100px;
+        margin: 2px;
+    }
+
+
+    .ficha{
+        height: 80px;
+        width: 40px;
+    }
+    
+    .fichaAcostada{
+        height: 40px;
+        width: 80px;
+        display: flex;
+    }
+    
+
+    .posicion{
+        position: absolute;
+        top: 40%;
+        left: 40%;
+    }
+
+    .posicion3{
+        position: absolute;
+        top: 40%;
+        left: 40%;
+        margin-left:-80px;
+    }
+    .posicion4{
+        position: absolute;
+        top: 40%;
+        left: 40%;
+        margin-left:-120px;
+    }
+
+    .posicion2{
+        position: absolute;
+        top: 40%;
+        left: 40%;
+        margin-left: -120px;
+        margin-top: 80px;
+    }
+
+    .tablero{
+        position: relative;  
+         display: flex;
+         width: 100%;
+         height: 430px;
+         
+     }
+}

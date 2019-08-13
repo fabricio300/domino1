@@ -1,0 +1,58 @@
+
+
+<ion-content>
+
+
+  <div class="contAll ">
+ 
+    <div class="otherPlayers centrar">
+
+      <div *ngFor="let fs of contrincantes" @itemState class="Contrincante centrar" >
+        <div class="perfil centrar">
+          <img src="../../assets/imagenes/perfil.png" alt="">
+        </div>
+        <p class="letra" style="margin: 2px;">nombre</p> 
+        <div class="fi centrar">
+          <p class="letra">Fichas:</p>
+          <p class="letra">7</p>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="tablero " id="table" @itemState>
+     
+          
+        
+        
+    </div>
+
+
+
+
+    <div class="player centrar" @itemState>
+   
+
+      <div *ngFor="let ficha of fichas" >
+        <div  
+        class="ficha " (click)="jugar(ficha)" @itemState>
+          <div class=" DePie">
+            <img src="{{ficha.imagen1}}" alt="">
+          </div>
+          
+          <div class=" DePie">
+            <img  src="{{ficha.imagen2}}" alt="">
+          </div>
+
+        </div>
+     </div>
+        
+          
+        
+       
+    
+    </div>
+
+  </div>
+
+</ion-content>
