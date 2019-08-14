@@ -19,14 +19,31 @@
       </div>
       
     </div>
-
-    <div class="tablero " id="table" @itemState>
-     
-          
+  <div style="position: relative; width: 100%;">
+    
+      <div class="centrar" style="width: 300px; position: absolute; z-index: 90; left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto;">
         
+          <img  *ngIf="fondo"  src="../../assets/imagenes/yelmo/1.png" style="width: 100%;">
+      </div>
+
+   
+    <div class="tablero centrar"  @itemState>
+
+        
+          <div id="table" style=" width:100%;  height: 100%; margin: auto; position:absolute; z-index: 100;">
+
+          </div>
+          
+         
         
     </div>
-
+      
+      
+  </div>
 
 
 

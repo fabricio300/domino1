@@ -40,6 +40,7 @@ export class Juego1Page implements OnInit {
   acciones=new Acciones1()
   newF=[]
   idPlayer=1
+  fondo:boolean =false
   ima="../../assets/imagenes/yelmo/1.png"
   fichas=[]
   contrincantes=['v','v','v']

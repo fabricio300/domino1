@@ -7,7 +7,8 @@ export class Acciones1{
     tamani2=120   /* 120 pc  / 80 movil */ 
     tamani1=60    /* 60 pc  / 40 movil */ 
 
-    
+    superior=0
+    margeSuperior=40
 
     extremoDerecho=null
     exremoIzquierdo=null
@@ -21,9 +22,15 @@ export class Acciones1{
 
     contadorIzquierda=0
     contadorDerecha=0
+    contadorIzquierdaInverza=0
+    contadorIzquierdaInverza2=0
+    contadorDerechaInverza=0
+    contadorDerechaInverza2=0
 
     inverzaDerecha=false
     inverzaIzquierda=false
+    derechaV=false
+    izquierdaV=false
     constructor(){}
     /// 1 == izquierda / 2 == derecha
     ponerFicha(fichap:Ficha,ladoJuego:any){
@@ -74,7 +81,7 @@ export class Acciones1{
         
         
         document.getElementById('table').append(ficha)
-    
+          
        
        
     }
@@ -99,6 +106,73 @@ export class Acciones1{
         }
         return ficha
     }
+
+   /* tipoDerecha(imagen1,imagen2){
+        let ficha
+
+        
+
+        if(this.contadorDerecha<1){
+            ficha=this.FichaAcostada(imagen1,imagen2)
+            ficha=this.pocicionarDerecha(ficha)
+            this.contadorDerecha=this.contadorDerecha+1
+        }else if(this.inverzaDerecha!=false){
+            ficha=this.FichaAcostada(imagen2,imagen1)
+            ficha=this.pocicionarDerechaInversa(ficha)
+            this.contadorDerechaInverza=this.contadorDerechaInverza+1
+            if(this.contadorDerechaInverza>3){
+                this.inverzaDerecha=false
+                this.contadorDerechaInverza2=0
+            }
+        }else if(this.derechaV!=false){
+            ficha=this.FichaAcostada(imagen1,imagen2)
+            ficha=this.pocicionarDerecha(ficha)
+            console.log("derechA= ",this.derecha);
+            this.contadorDerechaInverza2=this.contadorDerechaInverza2+1
+            if(this.contadorDerechaInverza2>2){
+                this.derechaV=false
+                this.contadorDerechaInverza=0
+            }
+        }else{
+            ficha=this.FichaDePie(imagen1,imagen2)
+           
+            
+
+            if(this.contadorDerechaInverza>3){
+                this.inverzaDerecha=false;
+                this.derechaV=true;
+                 console.log("condicion 2");
+                 this.derecha=this.derecha+80
+                 ficha.style.marginLeft=''+(this.derecha)+'px'
+                 this.verticalDerecha=this.verticalDerecha+40
+                 ficha.style.marginTop=''+(this.verticalDerecha)+'px'
+                 this.verticalDerecha=this.verticalDerecha+40
+                 this.derecha=this.derecha+40
+
+             
+            }else if(this.contadorDerecha==1){
+                this.inverzaDerecha=true;
+                this.derechaV=false;             
+                ficha.style.marginLeft=''+this.derecha+'px'
+                this.derecha=this.derecha-40
+                this.verticalDerecha=this.verticalDerecha+80
+               this.contadorDerecha=3
+               
+            }else{
+                console.log("ran2");  
+                this.inverzaDerecha=true;
+                this.derechaV=false;  
+                ficha.style.marginLeft=''+this.derecha+'px'
+                ficha.style.marginTop=''+(this.verticalDerecha)+'px'
+                this.derecha=this.derecha-40
+                this.verticalDerecha=this.verticalDerecha+80
+                
+               
+            }
+            
+        }
+        return ficha
+    }*/
 
     pocicionarDerecha(ficha){
         console.log("derecha");
@@ -147,10 +221,112 @@ export class Acciones1{
     }
 
 
+   /* tipoIzquierda(imagen1,imagen2){
+        let ficha
+
+        console.log("tiraficha");
+        
+
+        if(this.contadorIzquierda<1){
+            ficha=this.FichaAcostada(imagen1,imagen2)
+            ficha=this.pocicionarIzquierda(ficha)
+            this.contadorIzquierda=this.contadorIzquierda+1
+        }else if(this.inverzaIzquierda!=false){
+            
+            
+            ficha=this.FichaAcostada(imagen2,imagen1)
+            ficha=this.pocicionarIzquierdaInversa(ficha)
+            this.contadorIzquierdaInverza=this.contadorIzquierdaInverza+1
+            if(this.contadorIzquierdaInverza>3){
+                this.inverzaIzquierda=false
+                this.contadorIzquierdaInverza2=0
+            }
+        }else if(this.izquierdaV!=false){
+            console.log("conde 2");
+            ficha=this.FichaAcostada(imagen1,imagen2)
+            ficha=this.pocicionarIzquierda(ficha)
+            console.log("derechA= ",this.derecha);
+            this.contadorIzquierdaInverza2=this.contadorIzquierdaInverza2+1
+            if(this.contadorIzquierdaInverza2>2){
+                this.izquierdaV=false
+                this.contadorIzquierdaInverza=0
+            }
+        }else{
+            ficha=this.FichaDePie(imagen1,imagen2)
+           
+            
+
+            if(this.contadorIzquierdaInverza>3){
+                this.inverzaIzquierda=false;
+                this.izquierdaV=true;
+                 console.log("condicion 2");
+                 this.iZquierda=this.iZquierda-40
+                 ficha.style.marginLeft=''+(this.iZquierda)+'px'
+                 this.verticalIzquierda=this.verticalIzquierda-80
+                 ficha.style.marginTop=''+(this.verticalIzquierda)+'px'
+                 this.iZquierda=this.iZquierda-80
+                 console.log("izquieda == ",this.iZquierda);
+                 
+                 this.superior=this.superior+1
+                 if(this.superior>3){
+                    document.getElementById('table').style.marginTop=""+this.margeSuperior+"px"
+                    this.margeSuperior=this.margeSuperior+80
+                  }
+                
+            }else if(this.contadorIzquierda==1){
+                this.inverzaIzquierda=true;
+                this.izquierdaV=false;
+                this.verticalIzquierda=this.verticalIzquierda-40  
+                this.iZquierda=this.iZquierda-40          
+                ficha.style.marginLeft='-'+this.iZquierda+'px'
+                ficha.style.marginTop=''+this.verticalIzquierda+'px'
+                this.verticalIzquierda=this.verticalIzquierda+80
+                this.contadorIzquierda=3
+                this.iZquierda=this.iZquierda*(-1)
+                this.verticalIzquierda=this.verticalIzquierda-120
+                this.superior=this.superior+1
+                if(this.superior>3){
+                    document.getElementById('table').style.marginTop=""+this.margeSuperior+"px"
+                    this.margeSuperior=this.margeSuperior+80
+                 }
+            }else{
+                console.log("ran2");  
+                this.inverzaIzquierda=true;
+                this.izquierdaV=false;   
+                this.iZquierda=this.iZquierda+40
+                this.verticalIzquierda=this.verticalIzquierda-40;
+                ficha.style.marginLeft=''+this.iZquierda+'px'
+                
+                ficha.style.marginTop=''+(this.verticalIzquierda)+'px'
+                
+                this.verticalIzquierda=this.verticalIzquierda-40;
+                console.log("zzz ",this.iZquierda);
+                this.superior=this.superior+1
+                 if(this.superior>3){
+                   document.getElementById('table').style.marginTop=""+this.margeSuperior+"px"
+                   this.margeSuperior=this.margeSuperior+80
+                  }
+            }
+            
+        }
+        return ficha
+    }*/
+
+
     pocicionarIzquierda(ficha){
         console.log("izquierda");
-        ficha.style.marginLeft='-'+this.iZquierda+'px'
-        this.iZquierda=this.iZquierda+this.tamani2
+        
+        
+       
+        if(this.izquierdaV==true){
+            ficha.style.marginLeft=''+this.iZquierda+'px'
+            this.iZquierda=this.iZquierda-this.tamani2
+            
+        }else{
+            ficha.style.marginLeft='-'+this.iZquierda+'px'
+            this.iZquierda=this.iZquierda+this.tamani2
+           
+        }
         ficha.style.marginTop=''+this.verticalIzquierda+'px'
         return ficha
     }
@@ -184,8 +360,8 @@ export class Acciones1{
      ficha1.style.height=''+this.tamani1+'px';
      ficha1.style.overflow="hidden"
      ficha1.style.position="absolute"
-     ficha1.style.top=''+this.posicionMedia+'%'
-     ficha1.style.left=''+this.posicionMedia+'%'
+     ficha1.style.top=''+(this.posicionMedia /*+30*/)+'%'  /* para movil +20 */
+     ficha1.style.left=''+this.posicionMedia+'%'  
      ficha1.style.display='flex'
     
      var parte1=document.createElement("div");
@@ -235,7 +411,7 @@ FichaDePie(lado1,lado2){
     ficha1.setAttribute("id","idFichajugada")
     
     ficha1.style.position="absolute"
-    ficha1.style.top=''+this.posicionMedia+'%'
+    ficha1.style.top=''+(this.posicionMedia/*+30*/)+'%'  /* para movil +20 */
     ficha1.style.left=''+this.posicionMedia+'%'
 
  

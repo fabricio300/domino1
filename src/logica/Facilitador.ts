@@ -22,8 +22,8 @@ crearFicha(){
         for (let index = 0; index <=6; index++) {
                 for (let index2 = index; index2 >=0; index2--) {
                     ficha=new Ficha(contador,index,index2)
-                    ficha.setImagen1('../../assets/imagenes/punch/'+index+'.png')
-                    ficha.setImagen2('../../assets/imagenes/punch/'+index2+'.png')
+                    ficha.setImagen1('../../assets/imagenes/calabera/'+index+'.png')
+                    ficha.setImagen2('../../assets/imagenes/calabera/'+index2+'.png')
 
                     this.cajaDeFicha.push(ficha)
                     contador=contador+1
