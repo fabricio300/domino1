@@ -3,21 +3,25 @@ import { Ficha } from './Ficha';
 
 
 export class Acciones1{
-    posicionMedia=45  /* 45 pc  / 40 movil */ 
-    tamani2=120   /* 120 pc  / 80 movil */ 
-    tamani1=60    /* 60 pc  / 40 movil */ 
+    posicionMedia=40  /* 45 pc  / 40 movil */ 
+    tamani2=80   /* 120 pc  / 80 movil */ 
+    tamani1=40    /* 60 pc  / 40 movil */ 
+    idFichas=0
 
     superior=0
-    margeSuperior=40
+    inferior=0
+    margeSuperior=80
+    margenInferior=80
 
     extremoDerecho=null
     exremoIzquierdo=null
 
-    iZquierda=120
-    derecha=120
+    iZquierda=80
+    derecha=80
     verticalIzquierda=0
     verticalDerecha=0
 
+    
 
 
     contadorIzquierda=0
@@ -51,21 +55,21 @@ export class Acciones1{
             }
 
         
-           
+            location.href="#arriva"
         }else if((ladoJuego==2)){
             if(fichap.lado2==this.extremoDerecho){
                 ficha =this.tipoDerecha(fichap.imagen2,fichap.imagen1)
             }else{
                 ficha =this.tipoDerecha(fichap.imagen1,fichap.imagen2)
             }
-
+            location.href="#abajo"
             
            
         }
       
        //var ficha=this.FichaDePie()
 
-       
+        ficha.setAttribute("id",""+this.idFichas)
     
     
         ficha.animate([
@@ -81,14 +85,15 @@ export class Acciones1{
         
         
         document.getElementById('table').append(ficha)
-          
-       
+
+        
+        this.idFichas++
        
     }
     
 /*---------------------------posicionar fichas--------------------------------------------------------------*/
 
-    tipoDerecha(imagen1,imagen2){
+    /*tipoDerecha(imagen1,imagen2){
         let ficha
         if(this.contadorDerecha<4){
             ficha=this.FichaAcostada(imagen1,imagen2)
@@ -105,9 +110,9 @@ export class Acciones1{
             this.inverzaDerecha=true;
         }
         return ficha
-    }
+    }*/
 
-   /* tipoDerecha(imagen1,imagen2){
+   tipoDerecha(imagen1,imagen2){
         let ficha
 
         
@@ -148,7 +153,7 @@ export class Acciones1{
                  ficha.style.marginTop=''+(this.verticalDerecha)+'px'
                  this.verticalDerecha=this.verticalDerecha+40
                  this.derecha=this.derecha+40
-
+                this.cantidadInferrior()
              
             }else if(this.contadorDerecha==1){
                 this.inverzaDerecha=true;
@@ -157,7 +162,7 @@ export class Acciones1{
                 this.derecha=this.derecha-40
                 this.verticalDerecha=this.verticalDerecha+80
                this.contadorDerecha=3
-               
+               this.cantidadInferrior()
             }else{
                 console.log("ran2");  
                 this.inverzaDerecha=true;
@@ -166,13 +171,22 @@ export class Acciones1{
                 ficha.style.marginTop=''+(this.verticalDerecha)+'px'
                 this.derecha=this.derecha-40
                 this.verticalDerecha=this.verticalDerecha+80
-                
+                this.cantidadInferrior()
                
             }
             
         }
         return ficha
-    }*/
+    }
+
+    cantidadInferrior(){
+        this.inferior=this.inferior+1
+        if(this.inferior>2){
+            document.getElementById('abajo').style.marginBottom="-"+this.margenInferior+"px"
+            this.margenInferior=this.margenInferior+80
+            
+         }
+    }
 
     pocicionarDerecha(ficha){
         console.log("derecha");
@@ -197,7 +211,7 @@ export class Acciones1{
 
 
 
-    tipoIzquierda(imagen1,imagen2){
+   /* tipoIzquierda(imagen1,imagen2){
         let ficha
         if(this.contadorIzquierda<4){
             ficha=this.FichaAcostada(imagen1,imagen2)
@@ -218,10 +232,10 @@ export class Acciones1{
             this.inverzaIzquierda=true;
         }
         return ficha
-    }
+    }*/
 
 
-   /* tipoIzquierda(imagen1,imagen2){
+    tipoIzquierda(imagen1,imagen2){
         let ficha
 
         console.log("tiraficha");
@@ -267,11 +281,7 @@ export class Acciones1{
                  this.iZquierda=this.iZquierda-80
                  console.log("izquieda == ",this.iZquierda);
                  
-                 this.superior=this.superior+1
-                 if(this.superior>3){
-                    document.getElementById('table').style.marginTop=""+this.margeSuperior+"px"
-                    this.margeSuperior=this.margeSuperior+80
-                  }
+                this.cantidadSuperior()
                 
             }else if(this.contadorIzquierda==1){
                 this.inverzaIzquierda=true;
@@ -284,11 +294,8 @@ export class Acciones1{
                 this.contadorIzquierda=3
                 this.iZquierda=this.iZquierda*(-1)
                 this.verticalIzquierda=this.verticalIzquierda-120
-                this.superior=this.superior+1
-                if(this.superior>3){
-                    document.getElementById('table').style.marginTop=""+this.margeSuperior+"px"
-                    this.margeSuperior=this.margeSuperior+80
-                 }
+                
+                this.cantidadSuperior()
             }else{
                 console.log("ran2");  
                 this.inverzaIzquierda=true;
@@ -301,16 +308,22 @@ export class Acciones1{
                 
                 this.verticalIzquierda=this.verticalIzquierda-40;
                 console.log("zzz ",this.iZquierda);
-                this.superior=this.superior+1
-                 if(this.superior>3){
-                   document.getElementById('table').style.marginTop=""+this.margeSuperior+"px"
-                   this.margeSuperior=this.margeSuperior+80
-                  }
+                this.cantidadSuperior()
             }
             
         }
         return ficha
-    }*/
+    }
+
+    cantidadSuperior(){
+        this.superior=this.superior+1
+        if(this.superior>2){
+          document.getElementById('table').style.marginTop=""+this.margeSuperior+"px"
+          document.getElementById('arriva').style.marginTop="-"+this.margeSuperior+"px"
+          this.margeSuperior=this.margeSuperior+80
+         
+         }
+    }
 
 
     pocicionarIzquierda(ficha){
@@ -411,7 +424,7 @@ FichaDePie(lado1,lado2){
     ficha1.setAttribute("id","idFichajugada")
     
     ficha1.style.position="absolute"
-    ficha1.style.top=''+(this.posicionMedia/*+30*/)+'%'  /* para movil +20 */
+    ficha1.style.top=''+(this.posicionMedia /*+30*/)+'%'  /* para movil +20 */
     ficha1.style.left=''+this.posicionMedia+'%'
 
  

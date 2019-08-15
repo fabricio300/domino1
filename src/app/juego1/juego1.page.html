@@ -4,7 +4,7 @@
 
 
   <div class="contAll ">
- 
+   
     <div class="otherPlayers centrar">
 
       <div *ngFor="let fs of contrincantes" @itemState class="Contrincante centrar" >
@@ -27,19 +27,19 @@
       top: 0;
       margin: auto;">
         
-          <img  *ngIf="fondo"  src="../../assets/imagenes/yelmo/1.png" style="width: 100%;">
+          <img  *ngIf="fondo"  src="../../assets/imagenes/yelmo/yelmo.png" style="width: 90%; opacity: 0.8;">
       </div>
 
    
     <div class="tablero centrar"  @itemState>
-
+            <a id="arriva" style="position: absolute; top:0;">arriva</a>
         
           <div id="table" style=" width:100%;  height: 100%; margin: auto; position:absolute; z-index: 100;">
 
           </div>
           
          
-        
+          <a id="abajo" style="position: absolute; bottom: 0;">adajo</a>
     </div>
       
       
@@ -51,8 +51,12 @@
    
 
       <div *ngFor="let ficha of fichas" >
+         
         <div  
-        class="ficha " (click)="jugar(ficha)" @itemState>
+        class="ficha " (click)="jugar(ficha)" @itemState
+        
+        >
+       
           <div class=" DePie">
             <img src="{{ficha.imagen1}}" alt="">
           </div>
@@ -62,6 +66,7 @@
           </div>
 
         </div>
+      
      </div>
         
           
