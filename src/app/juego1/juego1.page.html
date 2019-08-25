@@ -7,21 +7,64 @@
    
     <div class="otherPlayers centrar">
 
-      <div *ngFor="let fs of contrincantes" @itemState class="Contrincante centrar" >
+      <div *ngFor="let fs of Agentes" @itemState class="Contrincante centrar" 
+       [ngClass]="{'turnoA':fs.turno==this.facilita.turno,turnoB:fs.turno!=this.facilita.turno}" >
         <div class="perfil centrar">
-          <img src="../../assets/imagenes/perfil.png" alt="">
+          <img src="{{fs.imagenPerfil}}" alt="">
         </div>
-        <p class="letra" style="margin: 2px;">nombre</p> 
+        <p class="letra" style="margin: 2px;">{{fs.nombre}}</p> 
         <div class="fi centrar">
           <p class="letra">Fichas:</p>
-          <p class="letra">7</p>
+          <p class="letra">{{fs.numeroDeFichas}}</p>
         </div>
       </div>
       
     </div>
+
+
+
+
+<!------------------------tablero-------------------------------------------->
   <div style="position: relative; width: 100%;">
     
-      <div class="centrar" style="width: 300px; position: absolute; z-index: 90; left: 0;
+
+
+    <div id="Marco" class="marco centrar">
+
+
+      <div class="dobleJugada centrar" *ngIf="dobleTiro">
+          <button class="botones centrar" style="position: absolute; left: 12px;"
+            (click)="tirarLado1()"
+          >
+              <img src="{{imagenlado1}}" width="80px;" style="border-radius: 10px;">
+          </button>
+          <button  class="botones centrar" style="position: absolute; right:12px;"
+            (click)="tirarLado2()"
+          >
+              <img src="{{imagenlado2}}" width="80px;" style="border-radius: 10px;">
+          </button>
+      </div>
+      
+
+      <div class="caja centrar letra" *ngIf="tomaficha">
+            <p *ngIf="caja" style="color:fuchsia;">Caja: tome un ficha</p>
+            <p *ngIf="!caja"> Caja basia salta turno</p>
+            <div *ngFor="let ficha of facilita.cajaDeFicha">
+                <div 
+                *ngIf="ficha.idJugador==null"
+                (click)="tomarFicha(ficha)"
+                class="ficha" style="background:white; border-radius: 10px; cursor: pointer;"></div>
+            </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+      <div class="centrar" style="width: 300px; position: absolute; z-index: 70; left: 0;
       right: 0;
       bottom: 0;
       top: 0;
@@ -30,23 +73,42 @@
           <img  *ngIf="fondo"  src="../../assets/imagenes/yelmo/yelmo.png" style="width: 90%; opacity: 0.8;">
       </div>
 
+
+
+
+
+
    
     <div class="tablero centrar"  @itemState>
-            <a id="arriva" style="position: absolute; top:0;">arriva</a>
+            <a id="arriva" class="amovilS">arriva</a>
         
-          <div id="table" style=" width:100%;  height: 100%; margin: auto; position:absolute; z-index: 100;">
-
-          </div>
+          <div id="table">  </div>
           
+
+
+
+          
+          
+
+
          
-          <a id="abajo" style="position: absolute; bottom: 0;">adajo</a>
+          <a id="abajo" class="aMovilI">adajo</a>
     </div>
       
       
+
+
+    
+
+
+
+
+
+
   </div>
 
 
-
+<!------------------------fichas del jugador-------------------------------------------->
     <div class="player centrar" @itemState>
    
 
@@ -54,7 +116,9 @@
          
         <div  
         class="ficha " (click)="jugar(ficha)" @itemState
-        
+          *ngIf="idPlayer==ficha.idJugador"
+          disabled="turno"
+          style="cursor: pointer;"
         >
        
           <div class=" DePie">

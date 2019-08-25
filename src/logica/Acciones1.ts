@@ -4,8 +4,8 @@ import { Ficha } from './Ficha';
 
 export class Acciones1{
     posicionMedia=40  /* 45 pc  / 40 movil */ 
-    tamani2=80   /* 120 pc  / 80 movil */ 
-    tamani1=40    /* 60 pc  / 40 movil */ 
+    tamani2=80 /* 120 pc  / 80 movil */ 
+    tamani1=40  /* 60 pc  / 40 movil */ 
     idFichas=0
 
     superior=0
@@ -16,8 +16,8 @@ export class Acciones1{
     extremoDerecho=null
     exremoIzquierdo=null
 
-    iZquierda=80
-    derecha=80
+    iZquierda=80 /* 120 pc  / 80 movil */ 
+    derecha=80   /* 120 pc  / 80 movil */ 
     verticalIzquierda=0
     verticalDerecha=0
 
@@ -45,7 +45,7 @@ export class Acciones1{
             ficha =this.FichaAcostada(fichap.imagen1,fichap.imagen2)
         }
         
-        console.log("AC lado ",ladoJuego);
+      //  console.log("AC lado ",ladoJuego);
         
         if(ladoJuego==1){
             if(fichap.lado1==this.exremoIzquierdo){
@@ -67,7 +67,7 @@ export class Acciones1{
            
         }
       
-       //var ficha=this.FichaDePie()
+       
 
         ficha.setAttribute("id",""+this.idFichas)
     
@@ -79,7 +79,7 @@ export class Acciones1{
             
           ], { 
             // timing options
-            duration: 1000,
+            duration: 2000,
            
           });
         
@@ -93,7 +93,7 @@ export class Acciones1{
     
 /*---------------------------posicionar fichas--------------------------------------------------------------*/
 
-    /*tipoDerecha(imagen1,imagen2){
+   /* tipoDerecha(imagen1,imagen2){
         let ficha
         if(this.contadorDerecha<4){
             ficha=this.FichaAcostada(imagen1,imagen2)
@@ -177,11 +177,11 @@ export class Acciones1{
             
         }
         return ficha
-    }
+   }
 
     cantidadInferrior(){
         this.inferior=this.inferior+1
-        if(this.inferior>2){
+        if(this.inferior>2){  // pc 
             document.getElementById('abajo').style.marginBottom="-"+this.margenInferior+"px"
             this.margenInferior=this.margenInferior+80
             
@@ -189,7 +189,7 @@ export class Acciones1{
     }
 
     pocicionarDerecha(ficha){
-        console.log("derecha");
+          // console.log("derecha");
         ficha.style.marginLeft=''+this.derecha+'px'
         ficha.style.marginTop=''+this.verticalDerecha+'px'
         this.derecha=this.derecha+this.tamani2
@@ -211,7 +211,7 @@ export class Acciones1{
 
 
 
-   /* tipoIzquierda(imagen1,imagen2){
+   /*tipoIzquierda(imagen1,imagen2){
         let ficha
         if(this.contadorIzquierda<4){
             ficha=this.FichaAcostada(imagen1,imagen2)
@@ -232,7 +232,7 @@ export class Acciones1{
             this.inverzaIzquierda=true;
         }
         return ficha
-    }*/
+   }*/
 
 
     tipoIzquierda(imagen1,imagen2){
@@ -327,7 +327,7 @@ export class Acciones1{
 
 
     pocicionarIzquierda(ficha){
-        console.log("izquierda");
+     //  console.log("izquierda");
         
         
        
@@ -376,6 +376,12 @@ export class Acciones1{
      ficha1.style.top=''+(this.posicionMedia /*+30*/)+'%'  /* para movil +20 */
      ficha1.style.left=''+this.posicionMedia+'%'  
      ficha1.style.display='flex'
+
+     ficha1.style.borderRadius="5px"
+     ficha1.style.background="black"
+     ficha1.style.border="1px solid black;"
+
+
     
      var parte1=document.createElement("div");
      parte1.style.width='50%'
@@ -393,6 +399,7 @@ export class Acciones1{
      ima1.style.height='100%'
      ima1.style.border='1px solid black'
      ima1.style.transform='rotate(90deg)'
+     ima1.style.borderRadius="5px"
  
  
      var ima2=document.createElement("img");
@@ -400,7 +407,7 @@ export class Acciones1{
      ima2.style.height='100%'
      ima2.style.border='1px solid black'
      ima2.style.transform='rotate(90deg)'
- 
+     ima2.style.borderRadius="5px"
  
      ficha1.appendChild(parte1)
      ficha1.appendChild(parte2)
@@ -422,11 +429,13 @@ FichaDePie(lado1,lado2){
     ficha1.style.height=''+this.tamani2+'px';
     ficha1.style.overflow="hidden"
     ficha1.setAttribute("id","idFichajugada")
-    
     ficha1.style.position="absolute"
     ficha1.style.top=''+(this.posicionMedia /*+30*/)+'%'  /* para movil +20 */
     ficha1.style.left=''+this.posicionMedia+'%'
 
+    ficha1.style.borderRadius="5px"
+    ficha1.style.background="black"
+    ficha1.style.border="1px solid black;"
  
     var parte1=document.createElement("div");
     parte1.style.width='100%'
@@ -443,14 +452,14 @@ FichaDePie(lado1,lado2){
     ima1.setAttribute("src",""+lado1)
     ima1.style.height='100%'
     ima1.style.border='1px solid black'
-    
+    ima1.style.borderRadius="5px"
 
 
     var ima2=document.createElement("img");
     ima2.setAttribute("src",""+lado2)
     ima2.style.height='100%'
     ima2.style.border='1px solid black'
-   
+    ima2.style.borderRadius="5px"
 
 
     ficha1.appendChild(parte1)
@@ -468,10 +477,10 @@ FichaDePie(lado1,lado2){
 
     setLadoDerecho(valor){
         this.extremoDerecho=valor
-        console.log("------------------------tablero--------------------------------------------");
-        console.log("tablero: lado1 ",this.exremoIzquierdo);
-        console.log("tablero: lado2 ",this.extremoDerecho);
-        console.log("------------------------tablero--------------------------------------------");
+          // console.log("------------------------tablero--------------------------------------------");
+         //  console.log("tablero: lado1 ",this.exremoIzquierdo);
+          // console.log("tablero: lado2 ",this.extremoDerecho);
+         //  console.log("------------------------tablero--------------------------------------------");
     }
 
 }

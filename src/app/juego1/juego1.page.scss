@@ -37,7 +37,6 @@
 
 .otherPlayers{
     width: 100%;
-   
     height: auto;
 }
 
@@ -46,8 +45,8 @@
     width: 35px;
     border-radius: 50%;
     overflow: hidden;
-    background: black;
-    
+    background: transparent;
+    border: transparent;
 }
 
 .perfil ::content img{
@@ -55,16 +54,26 @@
 }
 
 .Contrincante{
-    background-color: #2F4F4F;
     width: 200px;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
     padding-top: 5px;
     color: whitesmoke;
     height: 79px;
     margin: 4px;
+    transition: 0.5s;
 }
+
+.turnoA{
+    background: #4B0082 ;
+    transition: 0.5s;
+}
+.turnoB{
+    background-color: #2F4F4F;
+    transition: 0.5s;
+}
+
 
 .fi{
     
@@ -72,8 +81,8 @@
 }
 
 .tablero{
-   position: relative;
-    background: url('../../assets/imagenes/tableros/cuadrantes.png');
+    position: relative;
+    background: url('../../assets/imagenes/tableros/morado7.png');
     background-size: 100%;
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
@@ -82,7 +91,7 @@
     width: 98%;
     height: 390px;
     margin: auto;
-    border-radius: 10px;
+    
     overflow-x: scroll;
 }
 
@@ -94,6 +103,9 @@
     width: 60px;
     overflow: hidden;
     margin: 2px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background: #000000;
 }
 
 .fichaAcostada{
@@ -119,12 +131,14 @@
 .DePie::content img{
     height:100%;
     border: 1px solid black;
+    border-radius: 5px;
 }
 
 .acostado::content img{
     height:100%;
     border: 1px solid black;
     transform: rotate(90deg);
+    border-radius: 5px;
 }
 
 
@@ -156,6 +170,79 @@
     left: 45%;
     margin-left:-180px;
 }
+
+.amovilS{
+    position: absolute; top:0;
+    opacity: 0;
+}
+
+.aMovilI{
+    position: absolute; bottom: 0; 
+    opacity: 0;
+}
+
+.marco{
+    background: rgba($color: #000000, $alpha: 0.8);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 100;
+    color: white;
+    width: 100%;
+    height: 390px; 
+    margin: auto;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+#table{
+    //background: rebeccapurple;
+      width:100%;  height: 100%; margin: auto; position:absolute; z-index: 90; 
+}
+
+.dobleJugada{
+    width: 100%;
+    height: 100%;
+    //background: rebeccapurple;
+    position: relative;
+    color: #2F4F4F;
+}
+
+.botones{
+    border-radius: 10px;
+    overflow: hidden;
+    background: transparent;
+    width:80px;
+    height: 80px;
+}
+
+.marginHiden{
+    transition: 0.5s;
+    margin-left:-100%;
+}
+.caja{
+    //background: #2F4F4F;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.caja::content p{
+    width: 100%;
+    //background: red;
+    text-align: center;
+    font-size: 35px;
+}
+
+/*@media(max-width:1200px){
+    //quitar al pasar a movil
+    #table{
+        margin-left:320px;
+        
+        //background: red;
+        
+    }
+
+}*/
 
 @media(max-width: 500px){
     .Contrincante{ 
@@ -210,4 +297,20 @@
          height: 430px;
          
      }
+
+     
+     .marco{
+        height: 430px;
+         
+     }
+
+     .letra{
+         font-size: 13px;
+         font-family: 'Times New Roman', Times, serif;
+     }
+
+    
+     
 }
+
+
