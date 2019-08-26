@@ -46,16 +46,15 @@ export class Juego1Page implements OnInit {
   turno
   dobleTiro=false
   fichas=[]
-  contrincantes=["1","2","3"]
-  imagenlado1="../../assets/imagenes/yelmo/"
-  imagenlado2="../../assets/imagenes/yelmo/"
-  tomaficha=true
+  tomaficha=false
   caja=true
   fichaD:Ficha
-  
-  cantidadDeJugadores=2
+  imagenPerfil="../../assets/imagenes/normal/normal.png"
+  cantidadDeJugadores=4
   Agentes=[]
-
+  mula
+  parienciasTurno=[]
+  nombre="#yo"
   constructor(
     
 
@@ -66,8 +65,9 @@ export class Juego1Page implements OnInit {
 
   ngOnInit() {
     this.idPlayer=this.cantidadDeJugadores-1
-    document.getElementById("Marco").style.transition='0.5s'
-    document.getElementById("Marco").style.marginLeft="-100%"
+    //document.getElementById("Marco").style.transition='0.5s'
+   // document.getElementById("Marco").style.marginLeft="-100%"
+    document.getElementById("ganadorContenedor").className="quitar"
       this.facilita.crearFicha()
       //console.log("fichas=\n",this.fichas);
       this.newF=this.facilita.repartirFichas(this.cantidadDeJugadores-1)
@@ -86,14 +86,6 @@ export class Juego1Page implements OnInit {
             element.asingnarfichas(this.newF)
             element.setTablero(this.facilita.tablero)  
       });
-
-
-
-
-
-
-
-
 
       this.newF.forEach(element => {
         if(element.idJugador==this.idPlayer){
@@ -116,6 +108,7 @@ export class Juego1Page implements OnInit {
       
     // this.fichas=this.newF
     this.facilita.newCaja(this.newF)
+    this.facilita.setFichasJugador(this.fichas,this.imagenPerfil,this.nombre)
     this.tirarMulaMayor()
   }
 
@@ -134,24 +127,22 @@ export class Juego1Page implements OnInit {
      // console.log("juagad=",jugada);
       
       switch(jugada){
-        case 0:
+        case 0:this.existenFichasJugables()
           break;
           case 1: //ficha.setIdJuagador(null)
                   this.removerFicha(this.fichas,ficha)
-                  let gane=this.facilita.verGanador(this.idPlayer,this.fichas,"yo")
+                  let gane=this.facilita.verGanador(this.idPlayer,this.fichas,this.nombre,this.imagenPerfil)
                   if(gane==false)this.facilita.jugarTurno()
                     
             break;
             case 2: 
-              this.imagenlado1="../../assets/imagenes/yelmo/"+ this.facilita.tablero.extremo1+".png"
-               this.imagenlado2="../../assets/imagenes/yelmo/"+ this.facilita.tablero.extremo2+".png"
               this.dobleTiro=true;
               document.getElementById("Marco").style.marginLeft="0"
               this.fichaD=ficha
               break;
       }
 
-      this.existenFichasJugables()
+    
   }
 
   tirarLado1(){
@@ -159,7 +150,9 @@ export class Juego1Page implements OnInit {
       document.getElementById("Marco").style.marginLeft="-100%"
       this.dobleTiro=false;
       this.removerFicha(this.fichas,this.fichaD)
-      this.facilita.jugarTurno()
+      let gane=this.facilita.verGanador(this.idPlayer,this.fichas,this.nombre,this.imagenPerfil)
+      if(gane==false)this.facilita.jugarTurno()
+      
   }
   
   tirarLado2(){
@@ -167,7 +160,8 @@ export class Juego1Page implements OnInit {
       document.getElementById("Marco").style.marginLeft="-100%"
       this.dobleTiro=false;
       this.removerFicha(this.fichas,this.fichaD)
-      this.facilita.jugarTurno()
+      let gane=this.facilita.verGanador(this.idPlayer,this.fichas,this.nombre,this.imagenPerfil)
+      if(gane==false)this.facilita.jugarTurno()
 
   }
 
@@ -196,6 +190,7 @@ export class Juego1Page implements OnInit {
           document.getElementById("Marco").style.marginLeft="-100%"
          
       },2000);
+      this.facilita.saltar(true)
       this.facilita.jugarTurno()
     }
   }
@@ -287,11 +282,13 @@ export class Juego1Page implements OnInit {
       turnos.forEach(element => {
         if(element==this.idPlayer){
           this.turno=contador
+          this.parienciasTurno.push({nombre:this.nombre,imagen:this.imagenPerfil,turno:this.turno+1})
         }else if(contador<=this.Agentes.length ){
           
           this.Agentes.forEach(element2 => {
             if(element2.idPlayer==element){
               element2.setTurno(contador)
+              this.parienciasTurno.push({nombre:element2.nombre,imagen:element2.imagenPerfil,turno:element2.turno+1})
             }
           });
           contador2++   
@@ -303,19 +300,31 @@ export class Juego1Page implements OnInit {
       
       //console.log("mula -v ",fic);
      // console.log("#turno",this.facilita.turno);
+      this.mula=fic
 
-      if(fic.idJugador==this.idPlayer){
-        this.jugar(fic)
-      }else{
-        this.facilita.Agentes.forEach(element => {
-          if(fic.idJugador==element.idPlayer){
-            element.jugarMula(fic)
-          }
-        });
-      }
+    
+      console.log("apa\n",this.parienciasTurno);
       
-     
+    // this.jugarmula()
+
+
       
+  }
+
+
+  jugarmula(){
+    document.getElementById("Marco").style.transition='0.5s'
+    document.getElementById("Marco").style.marginLeft="-100%"
+    document.getElementById("turnosC").className="quitar"
+    if(this.mula.idJugador==this.idPlayer){
+      this.jugar( this.mula)
+    }else{
+      this.facilita.Agentes.forEach(element => {
+        if( this.mula.idJugador==element.idPlayer){
+          element.jugarMula( this.mula)
+        }
+      });
+    }
   }
 
   

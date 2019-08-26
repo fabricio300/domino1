@@ -2,15 +2,35 @@
 
 <ion-content>
 
-  <h1>{{this.facilita.gandor}}</h1>
+  
+  
+  
+
+
   <div class="contAll ">
+
+      <div class="ganador centrar" id="ganadorContenedor">
+          <h1 *ngIf="this.facilita.gan==1"
+          class="letra" style="font-size: 20px; width:100%; text-align: center; font-size: 30px;">
+            Ganador</h1>
+          <h1 
+          *ngIf="this.facilita.gan>1"
+          class="letra" style="font-size: 20px; width:100%; text-align: center; font-size: 30px;">
+            Empate</h1>
+
+
+          <div class="perfil-ganador centrar" *ngFor="let gan of this.facilita.gandor">
+            <img src="{{gan.imagen}}" width="155px" style="border-radius: 50%;">
+            <p class="letra" style="font-size: 20px; width: 100%; text-align: center;">{{gan.nombre}}</p>
+           </div>     
+      </div>
    
     <div class="otherPlayers centrar">
 
       <div *ngFor="let fs of Agentes" @itemState class="Contrincante centrar" 
        [ngClass]="{'turnoA':fs.turno==this.facilita.turno,turnoB:fs.turno!=this.facilita.turno}" >
         <div class="perfil centrar">
-          <img src="{{fs.imagenPerfil}}" alt="">
+          <img src="{{fs.imagenPerfil}}" >
         </div>
         <p class="letra" style="margin: 2px;">{{fs.nombre}}</p> 
         <div class="fi centrar">
@@ -46,7 +66,7 @@
       </div>
       
 
-      <div class="caja centrar letra" *ngIf="tomaficha">
+      <div class="caja1 centrar letra" *ngIf="tomaficha">
             <p *ngIf="caja" >Caja: tome un ficha</p>
             <p *ngIf="!caja"> Caja basia salta turno</p>
             <div *ngFor="let ficha of facilita.cajaDeFicha">
@@ -57,6 +77,26 @@
             </div>
       </div>
 
+
+      <div id="turnosC" class="caja1 centrar" style="position: relative; overflow: hidden;" >
+        
+          <div *ngFor="let tur of parienciasTurno"
+           class="perfil-ganador centrar" style="width: 100px; height: 100px;">
+              <img src="{{tur.imagen}}" width="90px" style="border-radius: 50%;">
+           
+            <p class="letra" style="font-size: 20px; width: 100%; text-align: center; color: gold;">
+              {{tur.nombre}} <samp style="color: honeydew;">Turno:{{tur.turno}}</samp>
+            </p>
+             
+          </div>  
+            
+              
+
+
+            <button  class="bontonOk letra centrar" (click)="jugarmula()">
+              ok
+            </button>
+      </div>
 
     </div>
 
@@ -122,7 +162,7 @@
         >
        
           <div class=" DePie">
-            <img src="{{ficha.imagen1}}" alt="">
+            <img src="{{ficha.imagen1}}" >
           </div>
           
           <div class=" DePie">

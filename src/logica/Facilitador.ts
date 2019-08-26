@@ -14,8 +14,12 @@ export class Facilitador{
     turno=0
     candidadDejugadores=0
     Agentes:any
-    gandor:any
+    gandor=[]
     saltos=0
+    fichaplayer:any
+    gan=0
+    imagenPerfil
+    nombreJugador
     constructor(){
 
     }
@@ -319,7 +323,7 @@ jugarTurno(){
     setTimeout(() => {
        if(this.saltos!=(this.Agentes.length+1))
             this.echo()    
-    },2300);
+    },2000);
     
     
 }
@@ -352,11 +356,15 @@ echo(){
     }
 }
 
-verGanador(id,fichas,nombre){
+verGanador(id,fichas,nombre,perfil){
     if(fichas.length==0){
         console.log("gador jugador ",id);     
-        this.gandor=nombre
+        this.gandor=[]
+        let ele={nombre:nombre, imagen:perfil}
+        this.gandor.push(ele)
+        this.gan=this.gandor.length
         console.log("gano ",this.gandor);
+        this.mostrarGanador()
         return true
     }else{
         return false
@@ -374,10 +382,67 @@ saltar(status:boolean){
 
     if(this.saltos==(this.Agentes.length+1)){
         console.log("termina");
-        this.gandor="tabla"
+    
+        this.verGanadorDeTabla()
     }
 }
 
+
+verGanadorDeTabla(){
+
+    let menor=100
+    let g=[]
+    this.Agentes.forEach(element => {
+        if(element.fichas.length<=menor){
+            let ele={nombre:element.nombre, imagen:element.imagenPerfil}
+            if(element.fichas.length==menor){
+                g.push(ele)
+            }else{
+                g=[]
+                g.push(ele)
+            }
+            menor=element.fichas.length
+        }
+    });
+
+    if(this.fichaplayer.length<=menor){
+        let ele={nombre:this.nombreJugador, imagen:this.imagenPerfil}
+        if(this.fichaplayer.lengthh==menor){
+            g.push(ele)
+        }else{
+            g=[]
+            g.push(ele)
+        }
+    }
+
+   
+    this.gan=g.length
+
+    this.gandor=g
+    console.log("g= ",this.gandor);
+   this.mostrarGanador()
+}
+
+setFichasJugador(fichas,imagenPerfil,nombre){
+        this.fichaplayer=fichas
+        this.imagenPerfil=imagenPerfil
+        this.nombreJugador=nombre
+}
+
+mostrarGanador(){
+    document.getElementById("ganadorContenedor").className="ganador centrar"
+    
+    document.getElementById("ganadorContenedor").animate([
+        // keyframes
+        {  opacity: 0 }, 
+        {  opacity: 1 },
+        
+      ], { 
+        // timing options
+        duration: 1000,
+       
+      });
+}
 
 
 }

@@ -214,9 +214,9 @@ jugarMula(ficha:Ficha){
         console.log("juega ",this.nombre);
         this.jugarFicha()
 
-       // let gane=this.facilitador.verGanador(this.idPlayer,this.fichas,this.nombre)
+        let gane=this.facilitador.verGanador(this.idPlayer,this.fichas,this.nombre,this.imagenPerfil)
 
-       // if(gane==false)
+        if(gane==false)
             this.facilitador.jugarTurno()
         
      }
