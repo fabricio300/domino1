@@ -14,6 +14,8 @@ export class Facilitador{
     turno=0
     candidadDejugadores=0
     Agentes:any
+    gandor:any
+    saltos=0
     constructor(){
 
     }
@@ -122,12 +124,14 @@ JugarFichaF(ficha:Ficha){
            
 
            if(lado1Juable==lado2Juable){
-                this.definirExtremosNuevos(lado1Juable,ficha.lado2)    
+                this.definirExtremosNuevos(lado1Juable,ficha.lado2,ficha.imagen2)    
                  //  console.log("mulajugada");
                 this.acciones.ponerFicha(ficha,lado1Juable)
                 jugada=1
            }else{
                jugada=2
+               console.log("jugada 2");
+               
            }
 
 
@@ -137,7 +141,7 @@ JugarFichaF(ficha:Ficha){
              //  console.log("lado2Juable ",lado2Juable);
             
             if(lado1Juable>0){
-                this.definirExtremosNuevos(lado1Juable,ficha.lado2)
+                this.definirExtremosNuevos(lado1Juable,ficha.lado2,ficha.imagen2)
                 
                  //  console.log("lado de la ficha jugable1");
                 this.acciones.ponerFicha(ficha,lado1Juable)
@@ -146,7 +150,7 @@ JugarFichaF(ficha:Ficha){
 
              //si el lado 2 es el que se puede jugar
             if(lado2Juable>0){
-                this.definirExtremosNuevos(lado2Juable,ficha.lado1)
+                this.definirExtremosNuevos(lado2Juable,ficha.lado1,ficha.imagen1)
                
                  //  console.log("lado de la ficha jugable2");
                 this.acciones.ponerFicha(ficha,lado2Juable)
@@ -180,11 +184,11 @@ jugable(lado){
 }
 
 
-definirExtremosNuevos(lado, newExtremo){
+definirExtremosNuevos(lado, newExtremo,imageneExtremo){
     if(lado==1){
-        this.tablero.seTExtremo1(newExtremo)
+        this.tablero.seTExtremo1(newExtremo,imageneExtremo)
     }else{
-        this.tablero.seTExtremo2(newExtremo)
+        this.tablero.seTExtremo2(newExtremo,imageneExtremo)
     }
 }
 
@@ -198,13 +202,13 @@ tirarLado1(ficha:Ficha){
 
 
     if(lado1Juable==1){
-        this.definirExtremosNuevos(lado1Juable,ficha.lado2)
+        this.definirExtremosNuevos(lado1Juable,ficha.lado2,ficha.imagen2)
         this.acciones.ponerFicha(ficha,lado1Juable)
         
     }else
     
     if(lado2Juable==1){
-        this.definirExtremosNuevos(lado2Juable,ficha.lado1)
+        this.definirExtremosNuevos(lado2Juable,ficha.lado1,ficha.imagen1)
         this.acciones.ponerFicha(ficha,lado2Juable)
     }
     this.acciones.setLadoIzquierdo(this.tablero.extremo1)
@@ -223,13 +227,13 @@ tirarLado2(ficha:Ficha){
 
 
     if(lado1Juable==2){
-        this.definirExtremosNuevos(lado1Juable,ficha.lado2)
+        this.definirExtremosNuevos(lado1Juable,ficha.lado2,ficha.imagen2)
         this.acciones.ponerFicha(ficha,lado1Juable)
         
     }else
     
     if(lado2Juable==2){
-        this.definirExtremosNuevos(lado2Juable,ficha.lado1)
+        this.definirExtremosNuevos(lado2Juable,ficha.lado1,ficha.imagen1)
         this.acciones.ponerFicha(ficha,lado2Juable)
     }
     this.acciones.setLadoIzquierdo(this.tablero.extremo1)
@@ -313,7 +317,8 @@ definirTurnos(jugador1:any,agentes:any){
 jugarTurno(){
 
     setTimeout(() => {
-        this.echo()    
+       if(this.saltos!=(this.Agentes.length+1))
+            this.echo()    
     },2300);
     
     
@@ -327,7 +332,7 @@ echo(){
         this.turno=this.turno+1
     }
     console.log("-turno ",this.turno);
-    console.log("agentes    vvv",this.Agentes);
+   // console.log("agentes    vvv",this.Agentes);
     let cont=0
     let ag=false
     for (let index = 0; index < this.Agentes.length; index++) {
@@ -347,6 +352,31 @@ echo(){
     }
 }
 
+verGanador(id,fichas,nombre){
+    if(fichas.length==0){
+        console.log("gador jugador ",id);     
+        this.gandor=nombre
+        console.log("gano ",this.gandor);
+        return true
+    }else{
+        return false
+    }
+}
+
+
+saltar(status:boolean){
+
+    if(status==true){
+        this.saltos=this.saltos+1
+    }else{
+        this.saltos=0
+    }
+
+    if(this.saltos==(this.Agentes.length+1)){
+        console.log("termina");
+        this.gandor="tabla"
+    }
+}
 
 
 

@@ -2,7 +2,7 @@
 
 <ion-content>
 
-
+  <h1>{{this.facilita.gandor}}</h1>
   <div class="contAll ">
    
     <div class="otherPlayers centrar">
@@ -36,18 +36,18 @@
           <button class="botones centrar" style="position: absolute; left: 12px;"
             (click)="tirarLado1()"
           >
-              <img src="{{imagenlado1}}" width="80px;" style="border-radius: 10px;">
+              <img src="{{this.facilita.tablero.imagenExtremo1}}" width="80px;" style="border-radius: 10px;">
           </button>
           <button  class="botones centrar" style="position: absolute; right:12px;"
             (click)="tirarLado2()"
           >
-              <img src="{{imagenlado2}}" width="80px;" style="border-radius: 10px;">
+              <img src="{{this.facilita.tablero.imagenExtremo2}}" width="80px;" style="border-radius: 10px;">
           </button>
       </div>
       
 
       <div class="caja centrar letra" *ngIf="tomaficha">
-            <p *ngIf="caja" style="color:fuchsia;">Caja: tome un ficha</p>
+            <p *ngIf="caja" >Caja: tome un ficha</p>
             <p *ngIf="!caja"> Caja basia salta turno</p>
             <div *ngFor="let ficha of facilita.cajaDeFicha">
                 <div 

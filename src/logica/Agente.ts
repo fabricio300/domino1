@@ -211,8 +211,15 @@ jugarMula(ficha:Ficha){
      // console.log("j facilitador",this.facilitador.turno, "  turno ", this.turno);
       
       if(this.facilitador.turno==this.turno){
+        console.log("juega ",this.nombre);
         this.jugarFicha()
-      }
+
+       // let gane=this.facilitador.verGanador(this.idPlayer,this.fichas,this.nombre)
+
+       // if(gane==false)
+            this.facilitador.jugarTurno()
+        
+     }
   }
 
   jugarFicha(){
@@ -223,10 +230,17 @@ jugarMula(ficha:Ficha){
    
       if(fichaAjugar!=null){
            
-            this.facilitador.JugarFichaF(fichaAjugar)
+            let juego=this.facilitador.JugarFichaF(fichaAjugar)
+
+            if(juego==2){
+                this.dobleJuego(fichaAjugar)
+            }
+            
+            console.log("juega ",fichaAjugar);
             this.removerFicha(this.fichas,fichaAjugar)
             this.numeroDeFichas=this.fichas.length
-   
+            this.facilitador.saltar(false)
+            
       }else{
          if(this.facilitador.cajaDeFicha.length>0){
              let index1= Math.floor(Math.random() * (this.facilitador.cajaDeFicha.length -0)) + 0;
@@ -242,19 +256,26 @@ jugarMula(ficha:Ficha){
             fichaAjugar= this.verFichasJuables()
 
             if(fichaAjugar!=null){
-                this.facilitador.JugarFichaF(fichaAjugar)
+                let juego=this.facilitador.JugarFichaF(fichaAjugar)
+
+                if(juego==2){
+                    this.dobleJuego(fichaAjugar)
+                }
+                this.facilitador.saltar(false)
                 this.removerFicha(this.fichas,fichaAjugar)
-                this.numeroDeFichas=this.fichas.length
+                
                
+            }else{
+                this.facilitador.saltar(true)
             }
             
-           
+            this.numeroDeFichas=this.fichas.length
          }
 
         
          
       }
-      this.facilitador.jugarTurno()
+      
   }
 
 
@@ -266,4 +287,26 @@ jugarMula(ficha:Ficha){
     this.removerFicha(this.facilitador.cajaDeFicha,ficha)
     this.numeroDeFichas=this.fichas.length
   }
+
+
+  dobleJuego(ficha){
+    let opcion=Math.floor(Math.random() * (2 - 1)) + 1;
+
+    if(opcion==2){
+        this.tirarLado2(ficha)
+    }else{
+        this.tirarLado1(ficha)
+    }
+  }
+
+
+tirarLado1(fichaD){
+    this.facilitador.tirarLado1(fichaD)    
+}
+
+tirarLado2(fichaD){
+    this.facilitador.tirarLado2(fichaD)
+    
+}
+
 }

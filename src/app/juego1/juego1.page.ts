@@ -52,8 +52,8 @@ export class Juego1Page implements OnInit {
   tomaficha=true
   caja=true
   fichaD:Ficha
-
-  cantidadDeJugadores=3
+  
+  cantidadDeJugadores=2
   Agentes=[]
 
   constructor(
@@ -138,7 +138,9 @@ export class Juego1Page implements OnInit {
           break;
           case 1: //ficha.setIdJuagador(null)
                   this.removerFicha(this.fichas,ficha)
-                  this.facilita.jugarTurno()
+                  let gane=this.facilita.verGanador(this.idPlayer,this.fichas,"yo")
+                  if(gane==false)this.facilita.jugarTurno()
+                    
             break;
             case 2: 
               this.imagenlado1="../../assets/imagenes/yelmo/"+ this.facilita.tablero.extremo1+".png"
@@ -166,6 +168,7 @@ export class Juego1Page implements OnInit {
       this.dobleTiro=false;
       this.removerFicha(this.fichas,this.fichaD)
       this.facilita.jugarTurno()
+
   }
 
 
