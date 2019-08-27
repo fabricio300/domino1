@@ -20,8 +20,16 @@ export class Facilitador{
     gan=0
     imagenPerfil
     nombreJugador
+    turnoPlayer
+    tomaficha=false
+    caja
     constructor(){
+        
+    }
 
+    setTrunoPlayer(turno,tomaficha,caja){
+        this.turnoPlayer=turno
+        this.tomaficha=tomaficha
     }
 
     setAgentes(agentes:any){
@@ -31,7 +39,7 @@ export class Facilitador{
     }
 
 /****************crear fichas*************************************** */  
-crearFicha(){
+crearFicha(apariencia){
         //console.log("entra a crear fichas");
         
         let contador=1
@@ -39,8 +47,8 @@ crearFicha(){
         for (let index = 0; index <=6; index++) {
                 for (let index2 = index; index2 >=0; index2--) {
                     ficha=new Ficha(contador,index,index2)
-                    ficha.setImagen1('../../assets/imagenes/normal/'+index+'.png')
-                    ficha.setImagen2('../../assets/imagenes/normal/'+index2+'.png')
+                    ficha.setImagen1(''+apariencia+index+'.png')
+                    ficha.setImagen2(''+apariencia+index2+'.png')
 
                     this.cajaDeFicha.push(ficha)
                     contador=contador+1
@@ -354,6 +362,17 @@ echo(){
     if(ag==true){
         this.Agentes[cont].jugar()
     }
+
+    if(this.turno==this.turnoPlayer){
+        console.log("miiiiiiiiiiiiiiii turno");
+        if(this.fichasJugables(this.fichaplayer)==true){
+            console.log("sepue jugar");
+            
+          }else{
+            console.log("NO sepue jugar");
+            this.mostrarCaja()
+          }
+    }
 }
 
 verGanador(id,fichas,nombre,perfil){
@@ -443,6 +462,36 @@ mostrarGanador(){
        
       });
 }
+
+
+
+mostrarCaja(){
+    this.tomaficha=true
+    this.cajaBasia()
+    document.getElementById("Marco").style.marginLeft="0"
+  }
+  
+
+cajaBasia(){
+    let res=false
+    this.cajaDeFicha.forEach(element => {
+        if(element.idJugador==null){
+          res=true
+        }
+    });
+    
+    this.caja=res
+    if(this.caja==false){
+      setTimeout(function(){
+          document.getElementById("Marco").style.marginLeft="-100%"
+      },2000);
+      this.saltar(true)
+      this.jugarTurno()
+    }
+}
+
+
+
 
 
 }

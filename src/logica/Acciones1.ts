@@ -5,8 +5,9 @@ import { Ficha } from './Ficha';
 export class Acciones1{
     posicionMedia=45  /* 45 pc  / 40 movil */ 
     tamani2=120 /* 120 pc  / 80 movil */ 
-    tamani1=60  /* 60 pc  / 40 movil */ 
+    tamani1=60 /* 60 pc  / 40 movil */ 
     idFichas=0
+    fichasJuagas=[]
 
     superior=0
     inferior=0
@@ -69,8 +70,8 @@ export class Acciones1{
       
        
 
-        ficha.setAttribute("id",""+this.idFichas)
-    
+        ficha.setAttribute("id",""+this.idFichas+"jugada")
+        this.fichasJuagas.push(""+this.idFichas+"jugada")
     
         ficha.animate([
             // keyframes
@@ -91,6 +92,10 @@ export class Acciones1{
        
     }
     
+
+ 
+
+
 /*---------------------------posicionar fichas--------------------------------------------------------------*/
 
     tipoDerecha(imagen1,imagen2){
@@ -240,7 +245,7 @@ export class Acciones1{
    }
 
 
-   /* tipoIzquierda(imagen1,imagen2){
+    /*tipoIzquierda(imagen1,imagen2){
         let ficha
 
         console.log("tiraficha");

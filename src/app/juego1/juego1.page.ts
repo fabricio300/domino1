@@ -38,6 +38,7 @@ import { Agente} from '../../logica/Agente';
   ]
 })
 export class Juego1Page implements OnInit {
+  apariencia="../../assets/imagenes/calabera/"
   facilita = new Facilitador()
   acciones=new Acciones1()
   newF=[]
@@ -49,12 +50,14 @@ export class Juego1Page implements OnInit {
   tomaficha=false
   caja=true
   fichaD:Ficha
-  imagenPerfil="../../assets/imagenes/normal/normal.png"
-  cantidadDeJugadores=4
+  imagenPerfil="../../assets/imagenes/calabera/calabera.png"
+  
+  cantidadDeJugadores=2
   Agentes=[]
   mula
   parienciasTurno=[]
   nombre="#yo"
+  go=false
   constructor(
     
 
@@ -68,7 +71,7 @@ export class Juego1Page implements OnInit {
     //document.getElementById("Marco").style.transition='0.5s'
    // document.getElementById("Marco").style.marginLeft="-100%"
     document.getElementById("ganadorContenedor").className="quitar"
-      this.facilita.crearFicha()
+      this.facilita.crearFicha(this.apariencia)
       //console.log("fichas=\n",this.fichas);
       this.newF=this.facilita.repartirFichas(this.cantidadDeJugadores-1)
       
@@ -121,13 +124,13 @@ export class Juego1Page implements OnInit {
       //console.log("turno",this.facilita.turno);
      
       let jugada=0
-      if(this.turno==this.facilita.turno){
+      if(this.turno==this.facilita.turno && this.go==true){
         jugada=this.facilita.JugarFichaF(ficha)
-      }
+      
      // console.log("juagad=",jugada);
       
       switch(jugada){
-        case 0:this.existenFichasJugables()
+        case 0: //this.existenFichasJugables()
           break;
           case 1: //ficha.setIdJuagador(null)
                   this.removerFicha(this.fichas,ficha)
@@ -141,6 +144,8 @@ export class Juego1Page implements OnInit {
               this.fichaD=ficha
               break;
       }
+    
+    }
 
     
   }
@@ -173,6 +178,16 @@ export class Juego1Page implements OnInit {
     this.removerFicha(this.facilita.cajaDeFicha,ficha)
     document.getElementById("Marco").style.marginLeft="-100%"
     this.tomaficha=false
+
+    console.log("tomo ficha", this.facilita.fichasJugables(this.fichas));
+    console.log("fichas ",this.fichas);
+    
+    if(this.facilita.fichasJugables(this.fichas)==false){
+      console.log("tomo ficha pero no se puede jugar");
+      
+      this.facilita.saltar(true)
+      this.facilita.jugarTurno()
+    }
       
   }
 
@@ -316,6 +331,8 @@ export class Juego1Page implements OnInit {
     document.getElementById("Marco").style.transition='0.5s'
     document.getElementById("Marco").style.marginLeft="-100%"
     document.getElementById("turnosC").className="quitar"
+    this.go=true
+    this.facilita.setTrunoPlayer(this.turno,this.tomaficha,this.caja)
     if(this.mula.idJugador==this.idPlayer){
       this.jugar( this.mula)
     }else{
@@ -326,6 +343,15 @@ export class Juego1Page implements OnInit {
       });
     }
   }
+
+
+
+  recetear(){
+    location.reload()
+
+  }
+
+
 
   
 }

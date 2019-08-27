@@ -20,9 +20,14 @@
 
 
           <div class="perfil-ganador centrar" *ngFor="let gan of this.facilita.gandor">
-            <img src="{{gan.imagen}}" width="155px" style="border-radius: 50%;">
+            <img src="{{gan.imagen}}" width="140px" style="border-radius: 50%;">
             <p class="letra" style="font-size: 20px; width: 100%; text-align: center;">{{gan.nombre}}</p>
-           </div>     
+           </div>   
+           
+           <div style="width: 90%;">
+             <button class="bontonOk letra centrar" style="width: 50%;" (click)="recetear()">Volber a jugar </button>
+           </div>
+           
       </div>
    
     <div class="otherPlayers centrar">
@@ -66,9 +71,9 @@
       </div>
       
 
-      <div class="caja1 centrar letra" *ngIf="tomaficha">
-            <p *ngIf="caja" >Caja: tome un ficha</p>
-            <p *ngIf="!caja"> Caja basia salta turno</p>
+      <div class="caja1 centrar letra" *ngIf="this.facilita.tomaficha">
+            <p *ngIf="this.facilita.caja" >Caja: tome un ficha</p>
+            <p *ngIf="!this.facilita.caja"> Caja basia salta turno</p>
             <div *ngFor="let ficha of facilita.cajaDeFicha">
                 <div 
                 *ngIf="ficha.idJugador==null"
@@ -82,9 +87,9 @@
         
           <div *ngFor="let tur of parienciasTurno"
            class="perfil-ganador centrar" style="width: 100px; height: 100px;">
-              <img src="{{tur.imagen}}" width="90px" style="border-radius: 50%;">
+              <img src="{{tur.imagen}}" width="80px" style="border-radius: 50%;">
            
-            <p class="letra" style="font-size: 20px; width: 100%; text-align: center; color: gold;">
+            <p class="letra" style="font-size: 15px; width: 100%; text-align: center; color: gold;">
               {{tur.nombre}} <samp style="color: honeydew;">Turno:{{tur.turno}}</samp>
             </p>
              
@@ -159,14 +164,15 @@
           *ngIf="idPlayer==ficha.idJugador"
           disabled="turno"
           style="cursor: pointer;"
+          
         >
        
-          <div class=" DePie">
-            <img src="{{ficha.imagen1}}" >
+          <div class=" DePie" >
+            <img src="{{ficha.imagen1}}"   [ngClass]="{'opaciti': this.facilita.turno!=turno}">
           </div>
           
           <div class=" DePie">
-            <img  src="{{ficha.imagen2}}" alt="">
+            <img  src="{{ficha.imagen2}}" [ngClass]="{'opaciti': this.facilita.turno!=turno}" >
           </div>
 
         </div>
