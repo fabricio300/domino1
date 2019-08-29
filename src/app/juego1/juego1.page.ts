@@ -52,7 +52,7 @@ export class Juego1Page implements OnInit {
   fichaD:Ficha
   imagenPerfil="../../assets/imagenes/calabera/calabera.png"
   
-  cantidadDeJugadores=2
+  cantidadDeJugadores=4
   Agentes=[]
   mula
   parienciasTurno=[]
@@ -71,6 +71,8 @@ export class Juego1Page implements OnInit {
     //document.getElementById("Marco").style.transition='0.5s'
    // document.getElementById("Marco").style.marginLeft="-100%"
     document.getElementById("ganadorContenedor").className="quitar"
+
+
       this.facilita.crearFicha(this.apariencia)
       //console.log("fichas=\n",this.fichas);
       this.newF=this.facilita.repartirFichas(this.cantidadDeJugadores-1)
@@ -83,7 +85,7 @@ export class Juego1Page implements OnInit {
             this.Agentes.push(agente)
       }
 
-      console.log("agentes= ",this.Agentes);
+      //console.log("agentes= ",this.Agentes);
       
       this.Agentes.forEach(element => {
             element.asingnarfichas(this.newF)
@@ -106,10 +108,7 @@ export class Juego1Page implements OnInit {
 
       this.newF=auxi
 
-     // console.log("newf" , this.newF);
-      
-      
-    // this.fichas=this.newF
+    
     this.facilita.newCaja(this.newF)
     this.facilita.setFichasJugador(this.fichas,this.imagenPerfil,this.nombre)
     this.tirarMulaMayor()
@@ -136,12 +135,16 @@ export class Juego1Page implements OnInit {
                   this.removerFicha(this.fichas,ficha)
                   let gane=this.facilita.verGanador(this.idPlayer,this.fichas,this.nombre,this.imagenPerfil)
                   if(gane==false)this.facilita.jugarTurno()
-                    
+                  console.log("yo no paso zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+                  
+                  this.facilita.saltar(false)
             break;
             case 2: 
               this.dobleTiro=true;
               document.getElementById("Marco").style.marginLeft="0"
               this.fichaD=ficha
+              console.log("yo no paso zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+              this.facilita.saltar(false)
               break;
       }
     
@@ -184,7 +187,7 @@ export class Juego1Page implements OnInit {
     
     if(this.facilita.fichasJugables(this.fichas)==false){
       console.log("tomo ficha pero no se puede jugar");
-      
+      console.log("jugador pasa-------------------------------");
       this.facilita.saltar(true)
       this.facilita.jugarTurno()
     }
@@ -201,12 +204,15 @@ export class Juego1Page implements OnInit {
     
     this.caja=res
     if(this.caja==false){
+
       setTimeout(function(){
+
           document.getElementById("Marco").style.marginLeft="-100%"
-         
+         console.log("jugador pasa-------------------------------");
+        //  this.facilita.saltar(true)
+          this.facilita.jugarTurno()
       },2000);
-      this.facilita.saltar(true)
-      this.facilita.jugarTurno()
+      
     }
   }
 
@@ -311,14 +317,14 @@ export class Juego1Page implements OnInit {
         contador++    
        
       });
-      console.log("mi turno es",this.turno);
+     // console.log("mi turno es",this.turno);
       
       //console.log("mula -v ",fic);
      // console.log("#turno",this.facilita.turno);
       this.mula=fic
 
     
-      console.log("apa\n",this.parienciasTurno);
+      //console.log("apa\n",this.parienciasTurno);
       
     // this.jugarmula()
 

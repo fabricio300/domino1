@@ -23,6 +23,15 @@ export class Facilitador{
     turnoPlayer
     tomaficha=false
     caja
+    mulaEnJuego=false
+
+   // efectoDemula="Voraz"
+    //descricionDeEfecto="Todos los jugadores toman una ficha de la caja"
+    efectoDemula=null
+    descricionDeEfecto=null
+    inmune=null
+    saltado=null
+
     constructor(){
         
     }
@@ -111,6 +120,7 @@ JugarFichaF(ficha:Ficha){
     let jugada=0
     let lado1Juable=0
     let lado2Juable=0
+    let esMula=null
     // primera ficha jugada
     if(this.tablero.fichasJugadas.length==0){
         this.tablero.JugarFicha(ficha)
@@ -118,6 +128,17 @@ JugarFichaF(ficha:Ficha){
         this.acciones.setLadoDerecho(this.tablero.extremo2)
         this.acciones.setLadoIzquierdo(this.tablero.extremo1)
         jugada=1
+        
+        
+        console.log("jugada---",jugada);
+        
+      
+            
+            if(ficha.avilidades==true){
+                this.tipoMula(ficha)
+            }
+        
+
     }else{
         
         lado1Juable=this.jugable(ficha.lado1)
@@ -140,13 +161,17 @@ JugarFichaF(ficha:Ficha){
                  //  console.log("mulajugada");
                 this.acciones.ponerFicha(ficha,lado1Juable)
                 jugada=1
+
+                
            }else{
                jugada=2
                console.log("jugada 2");
                
            }
 
-
+           if(ficha.avilidades==true){
+                this.tipoMula(ficha)
+            }
         }else{
             //si el lado 1 es el que se puede jugar
              //  console.log("lado1Juable ",lado1Juable);
@@ -158,6 +183,10 @@ JugarFichaF(ficha:Ficha){
                  //  console.log("lado de la ficha jugable1");
                 this.acciones.ponerFicha(ficha,lado1Juable)
                 jugada=1
+
+                if(ficha.avilidades==true){
+                    this.tipoMula(ficha)
+                }
             }
 
              //si el lado 2 es el que se puede jugar
@@ -167,6 +196,10 @@ JugarFichaF(ficha:Ficha){
                  //  console.log("lado de la ficha jugable2");
                 this.acciones.ponerFicha(ficha,lado2Juable)
                 jugada=1
+
+                if(ficha.avilidades==true){
+                    this.tipoMula(ficha)
+                }
             }
             this.acciones.setLadoIzquierdo(this.tablero.extremo1)
             this.acciones.setLadoDerecho(this.tablero.extremo2)
@@ -174,6 +207,7 @@ JugarFichaF(ficha:Ficha){
 
            
         }
+       
     }
 
   // console.log("-------------------facilitador ----------------------------------------------");
@@ -329,7 +363,7 @@ definirTurnos(jugador1:any,agentes:any){
 jugarTurno(){
 
     setTimeout(() => {
-       if(this.saltos!=(this.Agentes.length+1))
+       if(this.saltos!=(this.Agentes.length+1) && this.mulaEnJuego==false)
             this.echo()    
     },2000);
     
@@ -345,6 +379,25 @@ echo(){
     }
     console.log("-turno ",this.turno);
    // console.log("agentes    vvv",this.Agentes);
+    console.log("saltado=",this.saltado);
+    
+   if(this.saltado!=null){
+       if(this.saltado==this.turno){
+            
+            if(this.saltado>this.candidadDejugadores-1){
+                this.turno=0
+            }else{
+                this.turno=this.turno+1
+            }
+
+
+            console.log("--turno ",this.turno);
+            this.saltado=null
+        }
+  
+   }
+  
+
     let cont=0
     let ag=false
     for (let index = 0; index < this.Agentes.length; index++) {
@@ -392,29 +445,46 @@ verGanador(id,fichas,nombre,perfil){
 
 
 saltar(status:boolean){
-
+    console.log("saltos= ",this.saltos, " caja=",this.cajaDeFicha, "staus ",status," xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    
+    
     if(status==true){
-        this.saltos=this.saltos+1
-    }else{
+        if(this.cajaDeFicha.length==0)
+            this.saltos=this.saltos+1   
+        else
+        this.saltos=0
+       
+    }else{ 
+                        
         this.saltos=0
     }
+    
+        
 
-    if(this.saltos==(this.Agentes.length+1)){
+
+
+    if(this.saltos>=this.candidadDejugadores+1){
         console.log("termina");
     
         this.verGanadorDeTabla()
     }
+
+    console.log("saltos= ",this.saltos, " caja=",this.cajaDeFicha, "cantidad de jugadores +1=",this.candidadDejugadores+1," yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 }
 
 
 verGanadorDeTabla(){
-
+    console.log("saltos",this.saltos);
+    
     let menor=100
     let g=[]
     this.Agentes.forEach(element => {
         if(element.fichas.length<=menor){
+            console.log("agente ",element.idPlayer, " fichas",element.fichas.length);
+            
             let ele={nombre:element.nombre, imagen:element.imagenPerfil}
             if(element.fichas.length==menor){
+                
                 g.push(ele)
             }else{
                 g=[]
@@ -449,6 +519,8 @@ setFichasJugador(fichas,imagenPerfil,nombre){
 }
 
 mostrarGanador(){
+    console.log("ganador tabla");
+    
     document.getElementById("ganadorContenedor").className="ganador centrar"
     
     document.getElementById("ganadorContenedor").animate([
@@ -466,9 +538,12 @@ mostrarGanador(){
 
 
 mostrarCaja(){
-    this.tomaficha=true
-    this.cajaBasia()
-    document.getElementById("Marco").style.marginLeft="0"
+    if(this.gan==0){
+        this.tomaficha=true
+        this.cajaBasia()
+        document.getElementById("Marco").style.marginLeft="0"
+    }
+    
   }
   
 
@@ -483,13 +558,135 @@ cajaBasia(){
     this.caja=res
     if(this.caja==false){
       setTimeout(function(){
+
           document.getElementById("Marco").style.marginLeft="-100%"
+
+         
       },2000);
       this.saltar(true)
       this.jugarTurno()
     }
 }
 
+
+/*-----------------------------------poderes ------------------------------------------------------------------ */
+
+removerFicha(fichas:any, elemento:any){
+    var i = fichas.indexOf( elemento );
+    fichas.splice( i, 1 );
+
+  }
+
+tipoMula(ficha:Ficha){
+    let mula=null
+    if(ficha.lado1==ficha.lado2){
+        mula=ficha.lado1
+
+        switch(mula){
+            case 0:
+            break;
+            case 1:
+            break;
+            case 2:
+            break;
+            case 3:
+            break;
+            case 4:
+            break;
+            case 5: this.efectoDemula="Bloqueo"
+                    this.descricionDeEfecto="El jugador de esta ficha elige bloquear el turno de otro"
+                    this.inmune=ficha.idJugador
+                    this.mula5()
+                    console.log("id jugaor", ficha.idJugador , " extrar ",this.candidadDejugadores);
+                    
+                    if(ficha.idJugador<this.candidadDejugadores){
+                        this.Agentes.forEach(element => {
+                            if(element.idPlayer==ficha.idJugador){
+                                element.elegirAQuienBloquear()
+                            }
+                        });
+                    }
+                   
+
+            break;
+            case 6:            
+                    if(this.cajaDeFicha.length>=(this.Agentes.length+1)){
+                            this.efectoDemula="Voraz"
+                            this.descricionDeEfecto="Todos los jugadores toman una ficha de la caja"
+                            this.mula6()
+                        }
+            break;
+        }
+
+       
+    }
+
+   
+
+    return mula
+            
+}
+
+
+mula6(){
+    this.mulaEnJuego=true
+    if(this.cajaDeFicha.length>=(this.Agentes.length+1)){
+        this.mostrarEfectoDeMula()
+        console.log("se juega la mula 6");
+        
+        this.Agentes.forEach(element => {
+            element.tomarFicha(this.cajaDeFicha[0])
+            this.removerFicha(this.cajaDeFicha, this.cajaDeFicha[0])
+        });
+
+        let ficha=this.cajaDeFicha[0]
+        ficha.setIdJuagador(this.Agentes.length)
+        this.fichaplayer.push(ficha)
+        this.removerFicha(this.cajaDeFicha, this.cajaDeFicha[0])
+
+    }else{
+        this.mulaEnJuego=false
+    }
+
+    
+
+
+}
+
+mula5(){
+    this.mulaEnJuego=true
+    this.mostrarEfectoDeMula()
+
+}
+
+
+bloquearJuagador(turno){
+    if(turno==100){
+        this.saltado=this.turnoPlayer
+    }else{
+        this.saltado= turno
+    }
+    
+    this.cerrarEfectoMula()
+}
+
+
+
+mostrarEfectoDeMula(){
+    document.getElementById("Marco").style.transition='0.5s'
+    document.getElementById("Marco").style.marginLeft="0"
+
+    
+}
+
+cerrarEfectoMula(){
+        document.getElementById("Marco").style.marginLeft="-100%"
+        this.mulaEnJuego=false
+        this.efectoDemula=null
+        this.descricionDeEfecto=null
+        this.jugarTurno()
+   
+}
 
 
 

@@ -14,7 +14,7 @@ export class Ficha{
             this.lado1=lado1
             this.lado2=lado2
             if(lado1==lado2){
-                this.avilidades=1000
+                this.avilidades=true
             }
     }
 

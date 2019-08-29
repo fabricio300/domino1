@@ -1,6 +1,7 @@
 import { Facilitador } from "./Facilitador";
 import { Ficha } from './Ficha';
 import {Tablero} from './Tablero'
+import { log } from 'util';
 
 export class Agente{
     fichas=[]
@@ -20,9 +21,9 @@ export class Agente{
 
 
     setIdPlayer(id){
-        this.idPlayer=id
+       this.idPlayer=id
        let res= Math.floor(Math.random() * (7 - 1)) + 1
-        console.log("radom= ",res);
+       console.log("radom= ",res);
         
        this.definirApariencia(res)
     }
@@ -34,7 +35,7 @@ export class Agente{
     setTurno(turno){
         this.turno=turno
 
-        console.log("jugador: ",this.idPlayer, "turno ",this.turno);
+       // console.log("jugador: ",this.idPlayer, "turno ",this.turno);
     }
 
     asingnarfichas(todasLasFichas:any){
@@ -47,7 +48,7 @@ export class Agente{
             }
         });
 
-        console.log("fichas agente:\n",this.fichas);
+        //console.log("fichas agente:\n",this.fichas);
         this.numeroDeFichas=this.fichas.length
     }
     
@@ -120,7 +121,7 @@ jugarMula(ficha:Ficha){
         let jugada =0
 
         jugada =this.facilitador.JugarFichaF(ficha)
-        console.log("agente",this.idPlayer, "tiro");
+        //console.log("agente",this.idPlayer, "tiro");
         
         if(jugada>0){
             this.removerFicha(this.fichas,ficha)
@@ -227,10 +228,10 @@ jugarMula(ficha:Ficha){
       
       let fichaAjugar= this.verFichasJuables()
      // console.log("fichaAjugar",fichaAjugar);
-   
+        let juego=0
       if(fichaAjugar!=null){
            
-            let juego=this.facilitador.JugarFichaF(fichaAjugar)
+            juego=this.facilitador.JugarFichaF(fichaAjugar)
 
             if(juego==2){
                 this.dobleJuego(fichaAjugar)
@@ -239,7 +240,7 @@ jugarMula(ficha:Ficha){
             console.log("juega ",fichaAjugar);
             this.removerFicha(this.fichas,fichaAjugar)
             this.numeroDeFichas=this.fichas.length
-            this.facilitador.saltar(false)
+           
             
       }else{
          if(this.facilitador.cajaDeFicha.length>0){
@@ -258,22 +259,30 @@ jugarMula(ficha:Ficha){
             if(fichaAjugar!=null){
                 let juego=this.facilitador.JugarFichaF(fichaAjugar)
 
-                if(juego==2){
+            if(juego==2){
                     this.dobleJuego(fichaAjugar)
-                }
-                this.facilitador.saltar(false)
+            }
+               
+            
                 this.removerFicha(this.fichas,fichaAjugar)
                 
                
-            }else{
-                this.facilitador.saltar(true)
             }
             
             this.numeroDeFichas=this.fichas.length
          }
-
         
+      }
+
+      console.log("juego sta---------------------",juego);
          
+      if(juego==0){
+             console.log("jugador pasa-------------------------------",this.idPlayer);
+             this.facilitador.saltar(true) 
+         
+      }else{
+         console.log("jugador no pasa-------------------------------",this.idPlayer);
+         this.facilitador.saltar(false) 
       }
       
   }
@@ -307,6 +316,44 @@ tirarLado1(fichaD){
 tirarLado2(fichaD){
     this.facilitador.tirarLado2(fichaD)
     
+}
+
+
+elegirAQuienBloquear(){
+    setTimeout(() => {
+   
+    console.log("agente ",this.idPlayer, " decide");
+    
+    let elegido=null
+    let menor=100
+    if(this.facilitador.Agentes.length>1){
+
+        this.facilitador.Agentes.forEach(element => {
+                if(element.idPlayer!=this.idPlayer){
+                    if(element.fichas.length<menor){
+                        menor=element.fichas.length
+                        elegido=element.turno
+                    }
+
+
+                }
+            });
+        if(this.facilitador.fichaplayer.length<menor){
+            elegido=100
+        }
+
+        console.log("elegido   =  ",elegido);
+        this.facilitador.bloquearJuagador(elegido)
+        
+    }else{
+       this.facilitador.bloquearJuagador(elegido), this.facilitador.bloquearJuagador(100)
+    }
+
+
+     
+    },7000);
+
+
 }
 
 }

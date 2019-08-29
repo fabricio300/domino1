@@ -38,6 +38,7 @@
 .otherPlayers{
     width: 100%;
     height: auto;
+    
 }
 
 .perfil{
@@ -52,6 +53,9 @@
 .perfil ::content img{
     width:100%;
 }
+.redB{
+    background: red !important;
+}
 
 .Contrincante{
     width: 200px;
@@ -63,6 +67,7 @@
     height: 79px;
     margin: 4px;
     transition: 0.5s;
+    position: relative;
 }
 
 .turnoA{
@@ -277,10 +282,14 @@
 
 .opaciti{
     transition: 0.3s;
-    opacity: 0.7;
+    opacity: 0.4;
 }
 
-/*@media(max-width:1200px){
+.sombraG{
+    box-shadow: 0px 0px 5px 5px rgba(	255, 215, 0, 0.75);
+}
+
+@media(max-width:1200px){
     //quitar al pasar a movil
     #table{
         margin-left:320px;
@@ -289,7 +298,7 @@
         
     }
 
-}*/
+}
 
 @media(max-width: 500px){
     .Contrincante{ 

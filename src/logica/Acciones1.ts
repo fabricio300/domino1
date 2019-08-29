@@ -98,7 +98,7 @@ export class Acciones1{
 
 /*---------------------------posicionar fichas--------------------------------------------------------------*/
 
-    tipoDerecha(imagen1,imagen2){
+   tipoDerecha(imagen1,imagen2){
         let ficha
         if(this.contadorDerecha<4){
             ficha=this.FichaAcostada(imagen1,imagen2)
@@ -122,7 +122,7 @@ export class Acciones1{
         return ficha
     }
 
-   /*tipoDerecha(imagen1,imagen2){
+  /* tipoDerecha(imagen1,imagen2){
         let ficha
 
         
