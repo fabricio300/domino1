@@ -52,7 +52,7 @@ export class Juego1Page implements OnInit {
   fichaD:Ficha
   imagenPerfil="../../assets/imagenes/calabera/calabera.png"
   
-  cantidadDeJugadores=4
+  cantidadDeJugadores=3
   Agentes=[]
   mula
   parienciasTurno=[]

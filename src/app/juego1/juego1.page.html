@@ -20,7 +20,7 @@
 
 
           <div class="perfil-ganador centrar" *ngFor="let gan of this.facilita.gandor">
-            <img src="{{gan.imagen}}" width="120px" style="border-radius: 50%; opacity: 0.1;" >
+            <img src="{{gan.imagen}}" width="120px" style="border-radius: 50%; opacity: 1.0;" >
             <p class="letra" style="font-size: 20px; width: 100%; text-align: center;">{{gan.nombre}}</p>
            </div>   
            
@@ -82,7 +82,8 @@
 
       <div class="caja1 centrar letra" *ngIf="this.facilita.tomaficha && this.facilita.gan==0">
             <p *ngIf="this.facilita.caja" >Caja: tome un ficha</p>
-            <p *ngIf="!this.facilita.caja && this.facilita.gan==0 && this.facilita.efectoDemula==null"> Caja basia salta turno</p>
+            <p *ngIf="!this.facilita.caja && this.facilita.gan==0 && this.facilita.efectoDemula==null">
+               Caja basia salta turno</p>
             <div *ngFor="let ficha of facilita.cajaDeFicha">
                 <div 
                 *ngIf="ficha.idJugador==null"

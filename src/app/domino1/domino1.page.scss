@@ -1,0 +1,118 @@
+.contendorPrincipal{
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    position: relative;
+    background: black;
+}
+
+.letra{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.centrar{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tablero{
+    background: #008B8B;
+    width: 100%;
+    height: 350px;
+    position: relative;
+    overflow: hidden;
+    overflow-x: scroll;
+    
+}
+
+.contrincante{
+    width: 200px;
+    height: 100px;
+    //background: red;
+    margin: auto;
+}
+.contenedorFichasJugador{
+    widows: 100%;
+    height: 130px;
+    background: black;
+}
+
+.ficha{
+    width: 60px;
+    height: 120px;
+    background: black;
+    border: 2px solid black;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.ficha::content img{
+    margin:1px;
+    border: transparent;
+    border-radius: 5px;
+}
+
+.marco{
+    width: 100%;
+    height: 100%;
+    background: rgba($color: #000000, $alpha: 0.8);
+    position: absolute;
+    top: 0;
+}
+
+.de{
+    margin-left: -100%;
+}
+
+.ganador{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba($color: #000000, $alpha: 0.8);
+    top: 0px;
+    display: none;
+}
+
+.caja{
+    //background: blue;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.fichaOculta{
+    width: 60px;
+    height: 120px;
+    background: white;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+#Tablero{
+    height: 100%;
+    width: 1200px;
+    //background: rebeccapurple;
+    position: relative;
+}
+.sombraG{
+    box-shadow: 0px 0px 5px 5px rgba(	255, 215, 0, 0.75);
+}
+@media(max-width:605px){
+    .contrincante{
+        width: 120px;
+    }
+
+    .tablero{
+       height: 380px;
+    }
+
+    .ficha,.fichaOculta{
+        width: 40px;
+        height: 80px;
+    }
+    .tablero{
+        overflow-x: scroll;
+        //display: inline-block;
+    }
+}

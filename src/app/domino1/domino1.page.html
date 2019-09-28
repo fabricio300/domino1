@@ -1,0 +1,152 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Dominio
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+
+
+    <div class="contendorPrincipal letra" style="color: white;">
+
+
+
+        <div class="centrar" @itemState>
+            <div class="contrincante centrar" *ngFor="let agente of this.facilitador.Agentes"
+            (click)="this.facilitador.ocultarMarco()"
+            >
+                <img src="{{agente.imagenPerfil}}" width="35px;" style="border-radius: 50%; margin-top: 10px;">
+                
+                <p style="padding: 5px;">{{agente.nombre}}</p> 
+                <p style="width: 100%; text-align: center;">Fichas:{{agente.cantidadDeFichas}}</p>
+            </div>
+            
+      
+        </div>
+        
+
+
+
+
+
+
+
+
+
+
+      
+        <div id="Tablero0" class="tablero centrar">
+            
+          <div id="Tablero" class="centrar">
+
+
+          </div>
+
+
+
+         <div id="Marco1111" class="marco de">
+
+
+
+
+          <div class="caja centrar" *ngIf="this.facilitador.tomandoFichas==true">
+              <p  style="width: 100%; text-align: center; font-size: 28px;"
+              *ngIf="this.facilitador.caja.length>0"
+              >Toma una ficha de la caja</p>
+              <p  style="width: 100%;  text-align: center; font-size: 28px;"
+              *ngIf="this.facilitador.caja.length==0"
+              >Caja basia salta turno</p>
+
+              <div class="fichaOculta" @itemState *ngFor="let fi of this.facilitador.caja"
+                (click)="this.facilitador.tomarFichaDeCaja(fi,this.facilitador.idPlayer)"
+              ></div>
+
+          </div>
+
+
+          <div class="caja centrar" *ngIf="this.facilitador.mostrandoTurnos">
+              <div class="centrar" style="width: 100px; margin: auto;" *ngFor="let par of this.facilitador.turnos">
+                <img src="{{par.perfil}}" class="sombraG" width="60px;" style="border-radius: 50%;">
+                <p style="width: 100%; color: gold; text-align: center;">{{par.nombre}} <br>
+                  <samp style="width: 100%; color:white; text-align: center;">turno: {{par.turno}}</samp>
+                </p>
+               
+              </div>
+
+              <ion-button  style="margin: auto;" color="success" (click)="tirarmula()">
+                primera
+              </ion-button>
+            
+          </div>
+
+
+
+          <div id="Doble" class="caja centrar" style="position: relative;"  *ngIf="this.facilitador.tiroDoble">
+            <button class="centrar" style="position: absolute; background:transparent; top: 10px; outline: none;"
+              (click)="tiraLado1()"
+            >
+              <img src="{{this.facilitador.tablero.imagenExtremo1}}" width="80px;" class="sombraG" style="border-radius: 5px;">
+            </button>
+
+
+            <button class="centrar" style="position: absolute; background:transparent; bottom: 10px; outline: none;"
+              (click)="tiraLado2()"
+            >
+              <img src="{{this.facilitador.tablero.imagenExtremo2}}" width="80px;" class="sombraG" style="border-radius: 5px;">
+            </button>
+
+          </div>
+
+
+
+         </div>
+
+         <a id="Arriba" style="position: absolute; z-index: 100; top: 0;">
+          
+        </a>
+
+        <a id="Abajo" style="position: absolute; z-index: 100; bottom: 0; color:transparent;"
+        >
+      aaaaaaa
+      </a>
+
+      
+      
+        </div>
+      
+
+
+        <div class="contenedorFichasJugador centrar" style="height: auto;">
+          
+         
+          
+          <div class="ficha centrar" @itemState style="cursor: pointer" *ngFor="let ficha of this.facilitador.fichasDelJugador"
+            (click)="tiraFicha(ficha)"
+          >
+            <img src="{{ficha.imagen1}}" width="60px;" >
+            <img src="{{ficha.imagen2}}" width="60px;" >
+          </div> 
+         
+        </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        <div class="ganador">
+
+        </div>
+
+      </div>
+      
+</ion-content>
